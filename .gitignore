@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+
+# Data and model artifacts
+Data/
+*.zip
+*.pth
+*.pt
+*.onnx
+*.ckpt
+
+# Generated outputs
+local_repro/outputs/
+*.csv
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.webp
+
+# Documents and binaries
+*.pdf
+*.docx
+
+# Notebooks (keep local only)
+*.ipynb
+
+# VS Code local settings
+.vscode/
