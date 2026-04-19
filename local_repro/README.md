@@ -47,14 +47,40 @@ python local_repro/plot_results.py
 
 Figures are saved under `local_repro/outputs/figures`.
 
+### Current Recommended Run (0% around 60-70, improves with GAN)
+
+```powershell
+python local_repro/experiment_runner.py --output-dir local_repro/outputs --model-name densenet121 --scenario field --field-eval-distortion-prob 0.62 --real-train-subsample 0.4 --freeze-backbone --epochs 1 --batch-size 16 --num-workers 0 --seeds 42 1337 2025 7 99 --ratios 0 0.25 0.5 1.0 2.0
+```
+
+This protocol is intentionally harsh (field distortion setting) to keep baseline realistic and test augmentation benefit.
+
 ## Output Files
 
 - `local_repro/outputs/run_results.csv`
 - `local_repro/outputs/summary_results.csv`
+- `local_repro/outputs/publication_summary.csv`
+- `local_repro/outputs/paired_delta_vs_baseline.csv`
 - `local_repro/outputs/dataset_counts.csv`
 - `local_repro/outputs/run_config.json`
 - `local_repro/outputs/timeline_runs.csv`
 - `local_repro/outputs/timeline_epochs.csv`
+
+## Publication Figure Set
+
+- `Figure01_Accuracy_CI.png`
+- `Figure02_F1_CI.png`
+- `Figure03_Accuracy_Gain.png`
+- `Figure04_Accuracy_Boxplot.png`
+- `Figure05_F1_Boxplot.png`
+- `Figure06_Accuracy_F1_Frontier.png`
+- `Figure07_Metric_Heatmap.png`
+- `Figure08_Training_Composition.png`
+- `Figure09_ValAcc_LearningCurves.png`
+- `Figure10_TrainLoss_Curves.png`
+- `Figure11_Runtime_Boxplot.png`
+- `Figure12_Experiment_Timeline.png`
+- `Figure13_Paired_Delta.png`
 
 ## Notes
 
