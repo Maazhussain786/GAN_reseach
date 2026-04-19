@@ -18,6 +18,7 @@ Data/
 
 # Generated outputs
 local_repro/outputs/
+local_repro/search_runs/
 *.csv
 *.png
 *.jpg
