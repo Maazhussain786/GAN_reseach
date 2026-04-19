@@ -55,6 +55,7 @@ class RunConfig:
     freeze_backbone: bool
     image_size: int
     allow_synth_replacement: bool
+    synth_pool_fraction: float
     scenario: str
     field_eval_distortion_prob: float
 
@@ -210,6 +211,13 @@ def build_items_for_run(
 
         synth_dir = cfg.synthetic_root / cls_info["synthetic_dir"]
         synth_candidates = list_images(synth_dir)
+        if not (0.0 < cfg.synth_pool_fraction <= 1.0):
+            raise ValueError("synth_pool_fraction must be in (0, 1]")
+
+        if cfg.synth_pool_fraction < 1.0:
+            keep = max(1, int(len(synth_candidates) * cfg.synth_pool_fraction))
+            synth_candidates = rng.sample(synth_candidates, keep)
+
         synth_n = int(round(len(train_real) * ratio))
         synth_imgs = sample_synthetic(
             synth_candidates,
@@ -571,6 +579,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--freeze-backbone", action="store_true", default=False)
     parser.add_argument("--image-size", type=int, default=224)
     parser.add_argument("--no-synth-replacement", action="store_true")
+    parser.add_argument("--synth-pool-fraction", type=float, default=1.0)
     parser.add_argument("--scenario", type=str, default="field", choices=["clean", "field"])
     parser.add_argument("--field-eval-distortion-prob", type=float, default=0.60)
     return parser.parse_args()
@@ -599,6 +608,7 @@ def main() -> None:
         freeze_backbone=args.freeze_backbone,
         image_size=args.image_size,
         allow_synth_replacement=(not args.no_synth_replacement),
+        synth_pool_fraction=args.synth_pool_fraction,
         scenario=args.scenario,
         field_eval_distortion_prob=args.field_eval_distortion_prob,
     )
