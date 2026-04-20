@@ -36,6 +36,9 @@ local_repro/search_runs/
 # VS Code local settings
 .vscode/
 
+# Keep manuscript workspace local-only
+paper_latex/
+
 # LaTeX temporary/build artifacts
 *.aux
 *.bbl
